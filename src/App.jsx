@@ -1,23 +1,32 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [getResponse, setGetResponse] = useState([])
+
+
+  useEffect(() => {
+    fetch('https://railway.bulletinboard.techtrain.dev/threads')
+    .then(Response => Response.json()
+  .then(myJson => setGetResponse(myJson)))
+  .catch((error) => console.error('Error fetching data:', error));
+},[]);
+
+const handleClick = () => {
+  console.log(getResponse)
+  }
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <button onClick={handleClick} >CLICK THIS</button>
+    <ul>
+    {Object.keys(getResponse).map((item) => (
+    <li key={item}>
+      <p>   id: {getResponse[item].id}</p>
+      <p>title: {getResponse[item].title}</p>
+    </li>
+    ))}
+    </ul>
     </>
   )
 }
