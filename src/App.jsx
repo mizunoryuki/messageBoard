@@ -1,32 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
+import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { CreateNewThreads } from './components/CreateNewThread'
+import { ShowAllThreads } from './components/ShowAllThreads';
 import './App.css'
 
 function App() {
   const [getResponse, setGetResponse] = useState([])
 
-
-  useEffect(() => {
-    fetch('https://railway.bulletinboard.techtrain.dev/threads')
-    .then(Response => Response.json()
-  .then(myJson => setGetResponse(myJson)))
-  .catch((error) => console.error('Error fetching data:', error));
-},[]);
-
-const handleClick = () => {
-  console.log(getResponse)
-  }
-
   return (
     <>
-    <button onClick={handleClick} >CLICK THIS</button>
-    <ul>
-    {Object.keys(getResponse).map((item) => (
-    <li key={item}>
-      <p>   id: {getResponse[item].id}</p>
-      <p>title: {getResponse[item].title}</p>
-    </li>
-    ))}
-    </ul>
+    <BrowserRouter>
+      <Routes>
+        <Route path="*" element={<h1>Not Found Page</h1>} />
+        <Route path='/threads' element={<ShowAllThreads getResponse={getResponse} setGetResponse={setGetResponse} />} />
+        <Route path="/threads/new" element={<CreateNewThreads />} />
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }
