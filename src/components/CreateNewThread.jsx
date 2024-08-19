@@ -9,21 +9,19 @@ export const CreateNewThreads = () => {
 		console.log(text)
 		if(text){
 			fetch('https://railway.bulletinboard.techtrain.dev/threads', {
-				method: 'POST', // メソッドを指定
-				headers: {  // ヘッダーを設定
+				method: 'POST', 
+				headers: {
 				  'Content-Type': 'application/json'
 				},
-				body: JSON.stringify({  // ボディにJSON形式のデータを設定
+				body: JSON.stringify({
 				  title: `${text}`
 				})
 			  })
-			  // レスポンスをJSON形式で解析
 			  .then(response => response.json())
-			  // データをコンソールに出力
 			  .then(data => console.log(data));
-			console.log("作成できました")
+			console.log("スレッドを作成できました")
 		}else {
-			console.log("作成できませんでした")
+			console.log("スレッドを作成できませんでした")
 		}
 
 	}
@@ -33,7 +31,7 @@ export const CreateNewThreads = () => {
 	}
 
 	const BackToAllThreadsPage = () => {
-		console.log("戻ります")
+		console.log("スレッド一覧に戻ります")
 		Navigate(-1)
 
 	}
