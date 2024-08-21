@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './ShowAllPosts.scss'
 
 export const ShowAllPosts = ({ threadId, threadTitle }) => {
   const URL = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`;
-
   const [getPosts, setGetPosts] = useState([]);
   const [getText, setGetText] = useState("");
   const navigate = useNavigate();
@@ -63,23 +63,22 @@ export const ShowAllPosts = ({ threadId, threadTitle }) => {
   return (
     <>
       <div className="postsHeader">
-        <h1>投稿一覧</h1>
-        <p>スレッドid: {threadId}</p>
-        <p>スレッド名: {threadTitle}</p>
-        <button onClick={backToThreads}>スレッド一覧に戻る</button>
-        <div>
-          <input type="text" value={getText} onChange={handleChange} />
-          <button onClick={addPost}>投稿する</button>
-        </div>
+        	<h1>{threadTitle}</h1>
+          <div className="postsHeader-components">
+            <button onClick={backToThreads}>スレッド一覧に戻る</button>
+            <div className="postsHeader-postArea">
+              <input type="text" value={getText} onChange={handleChange} />
+              <button onClick={addPost}>投稿する</button>
+            </div>
+          </div>
       </div>
-      <div className="allPosts">
+      <div className="postslist">
         <p>↓投稿↓</p>
         <ul>
           {getPosts.length > 0 ? (
             getPosts.map((post) => (
               <li key={post.id}>
-                <p>id: {post.id}</p>
-                <p>投稿内容: {post.post}</p>
+                <p>{post.post}</p>
               </li>
             ))
           ) : (

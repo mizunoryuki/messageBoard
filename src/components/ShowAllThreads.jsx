@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import './ShowAllThreads.scss'
 
 export const ShowAllThreads = ({ getResponse, setGetResponse, selectedThread, setSelectedThread }) => {
 
@@ -12,9 +13,6 @@ export const ShowAllThreads = ({ getResponse, setGetResponse, selectedThread, se
 	  .catch((error) => console.error('Error fetching data:', error));
   }, [setGetResponse]);
 
-  const handleClick = () => {
-    navigate("new");
-  };
 
   const showPosts = (thread) => {
     console.log(`スレッドid:[${thread.id}]の投稿を確認します`);
@@ -25,12 +23,11 @@ export const ShowAllThreads = ({ getResponse, setGetResponse, selectedThread, se
   return (
     <>
       <h1>スレッド一覧</h1>
-      <button onClick={handleClick}>スレッド新規作成</button>
       <ul>
         {Object.keys(getResponse).map((item) => (
-          <li key={item}>
-            <p>id: {getResponse[item].id}</p>
-            <p>title: {getResponse[item].title}</p>
+          <li key={item} className="threadsList">
+            <p className="threadsList-number">No.{item}</p>
+            <p className="threadsList-title">{getResponse[item].title}</p>
             <button onClick={() => showPosts(getResponse[item])}>投稿を確認</button>
           </li>
         ))}

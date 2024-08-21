@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
+import './CreateNewThread.scss'
+
 export const CreateNewThreads = () => {
 
 	const [text, setText] = useState("")
@@ -20,6 +22,13 @@ export const CreateNewThreads = () => {
 			  .then(response => response.json())
 			  .then(data => console.log(data));
 			console.log("スレッドを作成できました")
+			setText("")
+
+			  const divElem = document.getElementById('makeNewThread')
+			  const newElem = document.createElement('p');
+			  newElem.textCOntent = 'スレッドを作成できました!!'
+			  divElem.appendChild(newElem);
+
 		}else {
 			console.log("スレッドを作成できませんでした")
 		}
@@ -38,14 +47,16 @@ export const CreateNewThreads = () => {
 
 	return(
 		<>
-			<h1>新規スレッド作成画面</h1>
-			<div>
-				<div style={{display:"flex", justifyContent:"center"}}>				
-					<button onClick={CreateNewThread} style={{marginRight:10}}>作成</button>
-					<button onClick={BackToAllThreadsPage} style={{marginLeft:10}}>戻る</button>
+			<h1>新規スレッド作成</h1>
+			<div className="makeNewThread">
+				<div className="makeNewThread-thread">
+				<p className="makeNewThread-thread-name">スレッド名:</p>
+				<input type="form" value={text} onChange={handleChanged} className="makeNewThread-thread-form"></input>
 				</div>
-				<p style={{display:"inline-block"}}>スレッド名:</p>
-				<input type="form" value={text} onChange={handleChanged} ></input>
+				<div className="makeNewThread-buttons">				
+					<button onClick={CreateNewThread}  className="makeNewThread-buttons-create">作成</button>
+					<button onClick={BackToAllThreadsPage}  className="makeNewThread-buttons-back">戻る</button>
+				</div>
 			</div>
 		</>
 

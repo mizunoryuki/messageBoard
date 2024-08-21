@@ -1,0 +1,34 @@
+.makeNewThread {
+	width: 70%;
+	margin: auto;
+
+
+	&-buttons {
+		margin-top: 10px;
+
+		&-create {
+			margin-right: 10px;
+		}
+
+		&-back {
+			margin-left: 10px;
+		}
+	}
+
+	&-thread {
+		margin: auto;
+		border: solid;
+		justify-content: center;
+
+		&-name {
+			width: 40%;
+			display: inline-block;
+		}
+
+		&-form {
+			background: white;
+			width: 40%;
+			color: black;
+		}
+	}
+}
