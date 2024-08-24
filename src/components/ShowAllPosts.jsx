@@ -8,29 +8,33 @@ export const ShowAllPosts = ({ threadId, threadTitle }) => {
   const [getText, setGetText] = useState("");
   const navigate = useNavigate();
 
+  // 投稿一覧を取得
   useEffect(() => {
     fetch(URL)
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then((data) => {
-    setGetPosts(data.posts); // データを正しくセットする
-  })
-  .catch((error) => console.error('Error fetching posts:', error));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setGetPosts(data.posts); // 正しくデータをセットする
+      })
+      .catch((error) => console.error('Error fetching posts:', error));
   }, [getPosts]);
 
+  // スレッド一覧に戻る
   const backToThreads = () => {
     console.log("スレッド一覧に戻ります");
     navigate(-1);
   };
 
+  // テキスト入力の状態を変更
   const handleChange = (event) => {
     setGetText(event.target.value);
   };
 
+  // 投稿を追加
   const addPost = () => {
     if (getText) {
       fetch(URL, {
@@ -63,7 +67,21 @@ export const ShowAllPosts = ({ threadId, threadTitle }) => {
   return (
     <>
       <div className="postsHeader">
-        	<h1>{threadTitle}</h1>
+        <h1>{threadTitle}</h1>
+        <div className="items">
+          <div className="postslist">
+            <ul>
+              {getPosts.length > 0 ? (
+                getPosts.map((post) => (
+                  <li key={post.id}>
+                    <p>{post.post}</p>
+                  </li>
+                ))
+              ) : (
+                <p>投稿がありません</p>
+              )}
+            </ul>
+          </div>
           <div className="postsHeader-components">
             <button onClick={backToThreads}>スレッド一覧に戻る</button>
             <div className="postsHeader-postArea">
@@ -71,20 +89,7 @@ export const ShowAllPosts = ({ threadId, threadTitle }) => {
               <button onClick={addPost}>投稿する</button>
             </div>
           </div>
-      </div>
-      <div className="postslist">
-        <p>↓投稿↓</p>
-        <ul>
-          {getPosts.length > 0 ? (
-            getPosts.map((post) => (
-              <li key={post.id}>
-                <p>{post.post}</p>
-              </li>
-            ))
-          ) : (
-            <p>投稿がありません</p>
-          )}
-        </ul>
+        </div>
       </div>
     </>
   );

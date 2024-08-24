@@ -26,7 +26,6 @@ export const ShowAllThreads = ({ getResponse, setGetResponse, selectedThread, se
       <ul>
         {Object.keys(getResponse).map((item) => (
           <li key={item} className="threadsList">
-            <p className="threadsList-number">No.{item}</p>
             <p className="threadsList-title">{getResponse[item].title}</p>
             <button onClick={() => showPosts(getResponse[item])}>投稿を確認</button>
           </li>
