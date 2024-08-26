@@ -5,6 +5,7 @@ import './CreateNewThread.scss'
 export const CreateNewThreads = () => {
 
 	const [text, setText] = useState("")
+	const [isThreadCreated, setIsThreadCreated] = useState(false)
 	const Navigate = useNavigate()
 
 	const CreateNewThread = () => {
@@ -22,15 +23,12 @@ export const CreateNewThreads = () => {
 			  .then(response => response.json())
 			  .then(data => console.log(data));
 			console.log("スレッドを作成できました")
+			setIsThreadCreated(true)
 			setText("")
-
-			  const divElem = document.getElementById('makeNewThread')
-			  const newElem = document.createElement('p');
-			  newElem.textCOntent = 'スレッドを作成できました!!'
-			  divElem.appendChild(newElem);
 
 		}else {
 			console.log("スレッドを作成できませんでした")
+			setIsThreadCreated(false)
 		}
 
 	}
@@ -41,7 +39,7 @@ export const CreateNewThreads = () => {
 
 	const BackToAllThreadsPage = () => {
 		console.log("スレッド一覧に戻ります")
-		Navigate(-1)
+		Navigate("/threads")
 
 	}
 
@@ -57,6 +55,9 @@ export const CreateNewThreads = () => {
 					<button onClick={CreateNewThread}  className="makeNewThread-buttons-create">作成</button>
 					<button onClick={BackToAllThreadsPage}  className="makeNewThread-buttons-back">戻る</button>
 				</div>
+				{isThreadCreated && (
+          <p>スレッドを作成できました</p>
+        )}
 			</div>
 		</>
 

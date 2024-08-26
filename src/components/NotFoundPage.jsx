@@ -5,7 +5,7 @@ export const NotFoundPage = () => {
 	const Navigate = useNavigate()
 
 	const handleClick = () => {
-		Navigate(-1)
+		Navigate('/threads')
 	}
 
 	return (

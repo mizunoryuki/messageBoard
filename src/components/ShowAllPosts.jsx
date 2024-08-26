@@ -18,7 +18,7 @@ export const ShowAllPosts = ({ threadId, threadTitle }) => {
         return response.json();
       })
       .then((data) => {
-        setGetPosts(data.posts); // 正しくデータをセットする
+        setGetPosts(data.posts);
       })
       .catch((error) => console.error('Error fetching posts:', error));
   }, [getPosts]);
@@ -26,7 +26,7 @@ export const ShowAllPosts = ({ threadId, threadTitle }) => {
   // スレッド一覧に戻る
   const backToThreads = () => {
     console.log("スレッド一覧に戻ります");
-    navigate(-1);
+    navigate("/threads");
   };
 
   // テキスト入力の状態を変更
@@ -54,7 +54,7 @@ export const ShowAllPosts = ({ threadId, threadTitle }) => {
         })
         .then(() => {
           console.log(`"${getText}"を投稿しました`);
-          setGetText(""); // 投稿後に入力フィールドをクリア
+          setGetText("");
         })
         .catch((error) => {
           console.error("Error posting data:", error);
@@ -78,7 +78,7 @@ export const ShowAllPosts = ({ threadId, threadTitle }) => {
                   </li>
                 ))
               ) : (
-                <p>投稿がありません</p>
+                <p>投稿がありません</p>//投稿がない場合に←の文章を表示
               )}
             </ul>
           </div>

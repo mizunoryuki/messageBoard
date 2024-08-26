@@ -6,7 +6,7 @@ export const Header = () => {
 	const navigate = useNavigate();
 
 	const handleClick = () => {
-		navigate("threads/new");
+		navigate("/threads/new");
 	  };
 
 	return (
