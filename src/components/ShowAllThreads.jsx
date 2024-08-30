@@ -17,7 +17,7 @@ export const ShowAllThreads = ({ getResponse, setGetResponse, selectedThread, se
   const showPosts = (thread) => {
     console.log(`スレッドid:[${thread.id}]の投稿を確認します`);
     setSelectedThread({ ...selectedThread, id: thread.id, title: thread.title });
-    navigate(`/threads/${thread.id}`);
+    navigate(`/threads/:${thread.id}`);
   };
 
   return (
